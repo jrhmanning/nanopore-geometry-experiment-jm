@@ -7,86 +7,158 @@ interface:
         source:
           path: 'input/cif_files.dat'
   propertiesSpec: # output information description
-  - name: 'D_is'
-    description: '"Diameter of largest included sphere", expressed in Å (Angstrom)'
+  - name: 'Volume'
+    description: 'Total cell volume, expressed in Å^3 (Angstrom)'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
-  - name: 'D_fs'
-    description: '"Diameter of largest free sphere", expressed in Å (Angstrom)'
-    propertyExtractionMethod:
-      hookGetProperties:
-        source:
-          keyOutput: 'geometricalProperties'
-  - name: 'D_isfs'
-    description: '"Diameter of largest included sphere along free path", expressed in Å (Angstrom)'
-    propertyExtractionMethod:
-      hookGetProperties:
-        source:
-          keyOutput: 'geometricalProperties'
-  - name: 'ASA_m^2/cm^3'
-    description: '"Accessible surface area (volumetric)", expressed in m^2/cm^3'
-    propertyExtractionMethod:
-      hookGetProperties:
-        source:
-          keyOutput: 'geometricalProperties'
-  - name: 'ASA_m^2/g'
-    description: '"Accessible surface area (gravimetric)", expressed in m^2/g'
-    propertyExtractionMethod:
-      hookGetProperties:
-        source:
-          keyOutput: 'geometricalProperties'
-  - name: 'NASA_m^2/cm^3'
-    description: '"Non-accessible surface area (volumetric)", expressed in m^2/cm^3'
-    propertyExtractionMethod:
-      hookGetProperties:
-        source:
-          keyOutput: 'geometricalProperties'
-  - name: 'NASA_m^2/g'
-    description: '"Non-accessible surface area (gravimetric)", expressed in m^2/g'
-    propertyExtractionMethod:
-      hookGetProperties:
-        source:
-          keyOutput: 'geometricalProperties'
-  - name: 'Unitcell_volume'
-    description: '"Unit cell volume", expressed in Å^3 (Angstrom^3)'
+  - name: 'Mass'
+    description: 'Total cell mass, expressed in g/mol'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
   - name: 'Density'
-    description: '"Crystal density", expressed as g/cm^3'
+    description: 'Total cell density, expressed in g/cm^3'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
-  - name: 'AV_Volume_fraction'
-    description: '"Accessible volume fraction", expressed as a fraction [0,1]'
+  - name: 'PLD'
+    description: 'Pore-limiting diameter, expressed in Å (Angstrom)'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
-  - name: 'AV_cm^3/g'
-    description: '"Accessible volume (gravimetric)", expressed in cm^3/g'
+  - name: 'LCD'
+    description: 'Largest cavity diameter, expressed in Å^3 (Angstrom)'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
-  - name: 'NAV_Volume_fraction'
-    description: '"Non-accessible volume fraction", expressed as a fraction [0,1]'
+  - name: 'Dimensionality'
+    description: 'Cell percolation dimensionality (0, 1, 2, or 3)'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
-  - name: 'NAV_cm^3/g'
-    description: '"Non-accessible volume (gravimetric)", expressed in cm^3/g'
+  - name: 'T_S_AC'
+    description: 'Total accessible surface area, expressed in Å^2 (Angstrom)'
     propertyExtractionMethod:
       hookGetProperties:
         source:
           keyOutput: 'geometricalProperties'
-  - name: 'n_pockets'
-    description: '"Number of non-accessible pockets", expressed as an integer.'
+  - name: 'T_S_AC_cm3'
+    description: 'Total accessible surface area per unit volume, expressed in m2/cm3'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_S_AC_g'
+    description: 'Total accessible surface area per unit mass, expressed in m2/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_V_He'
+    description: 'Total Helium-accessible pore volume, expressed in Å^3 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_V_He_g'
+    description: 'Total Helium-accessible pore volume per unit mass, expressed in cm^3/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_V_G_A3'
+    description: 'Total geometric pore volume, expressed in Å^3 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_V_G'
+    description: 'Total geometric pore volume per unit mass, expressed in cm^3/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_V_PO_A3'
+    description: 'Total Probe-accessible pore volume, expressed in Å^3 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_V_PO'
+    description: 'Total Probe-accessible pore volume per unit mass, expressed in cm^3/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'T_FV_PO'
+    description: 'Total Probe-accessible volume fraction'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_S_AC'
+    description: 'Network-accessible surface area, expressed in Å^2 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_S_AC_cm3'
+    description: 'Network-accessible surface area per unit volume, expressed in m2/cm3'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_S_AC_g'
+    description: 'Network-accessible surface area per unit mass, expressed in m2/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_V_He'
+    description: 'Network-accessible Helium pore volume, expressed in Å^3 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_V_He_g'
+    description: 'Network-accesible Helium pore volume per unit mass, expressed in cm^3/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_V_G_A3'
+    description: 'Network-accessible geometric pore volume, expressed in Å^3 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_V_G'
+    description: 'Network-accessible geometric pore volume per unit mass, expressed in cm^3/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_V_PO_A3'
+    description: 'Network-accessible Probe pore volume, expressed in Å^3 (Angstrom)'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_V_PO'
+    description: 'Network-accessible Probe pore volume per unit mass, expressed in cm^3/g'
+    propertyExtractionMethod:
+      hookGetProperties:
+        source:
+          keyOutput: 'geometricalProperties'
+  - name: 'NA_FV_PO'
+    description: 'Network-accessible Probe volume fraction'
     propertyExtractionMethod:
       hookGetProperties:
         source:
@@ -149,18 +221,18 @@ components: # The workflow, dividdd into manageable stages
       replicate: '%(numberOfNanopores)s'
 
   - stage: 0 # Creates preprocesses filenames into input geometries for Zeo
-    name: AsymmetricUnitCell
+    name: InputFileGen
     command:
-      environment: raspa
-      executable: create_supercell.sh
-      arguments: -f nanopore-database:ref -n stage0.GetNanoporeName:output -s stage0.GetNanoporeSource:output -u 1,1,1 -o .
+      environment: geometry
+      executable: poreblazer_preprocess.py
+      arguments: --FrameworkFolder nanopore-database:ref -f stage0.GetNanoporeName:output -FrameworkFolder stage0.GetNanoporeSource:output -o . #works?
     references:
       - nanopore-database:ref
       - stage0.GetNanoporeName:output
       - stage0.GetNanoporeSource:output
     resourceManager:
       kubernetes:
-        image: quay.io/st4sd/community-applications/raspa-source-mdlab:latest
+        image: hub.docker.com/layers/jrhmanning/poreblazer:latest
         cpuUnitsPerCore: 0.25
     resourceRequest:
       memory: 512Mi
@@ -169,18 +241,19 @@ components: # The workflow, dividdd into manageable stages
       - Killed
       - KnownIssue
 
-  - stage: 1 # runs Zeo
-    name: Zeo
+  - stage: 1 # runs Poreblazer
+    name: PoreBlazer
     command:
       environment: geometry
-      executable: zeo.sh
-      arguments: -n stage0.GetNanoporeName:output_P1 -p '%(probeRadius_A)s' -o .
+      executable: poreblazer_run.py
+      arguments: -f stage0.GetNanoporeName:output -i . -o .
     references:
       - stage0.GetNanoporeName:output
-      - stage0.AsymmetricUnitCell/cif.tgz:copy
+      - stage0.InputFileGen/input.dat:copy
+      - stage0.InputFileGen/xyz.tgz:copy
     resourceManager:
       kubernetes:
-        image: quay.io/st4sd/community-applications/geometry-mdlab:latest
+        image: hub.docker.com/layers/jrhmanning/poreblazer:latest
         cpuUnitsPerCore: 1.0
     resourceRequest:
       memory: '%(zeo_memory)s'
@@ -190,18 +263,17 @@ components: # The workflow, dividdd into manageable stages
       - KnownIssue
 
   - stage: 1 # postprocesses output to a json file
-    name: GeoAmalgamate
+    name: Postprocess
     command:
       environment: geometry
-      executable: geo_amalgamate.py
-      arguments: .
+      executable: poreblazer_postprocess.py 
+      arguments: -f stage0.GetNanoporeName:output .
     references:
-      - stage1.Zeo/Zeo.sa:copy
-      - stage1.Zeo/Zeo.res:copy
-      - stage1.Zeo/Zeo.vol:copy
+      - stage0.GetNanoporeName:output
+      - stage1.PoreBlazer/summary.tgz:copy
     resourceManager:
       kubernetes:
-        image: quay.io/st4sd/community-applications/geometry-mdlab:latest
+        image: hub.docker.com/layers/jrhmanning/poreblazer:latest # need to update the docker image to have the postprocessing script in too
         cpuUnitsPerCore: 0.25
     resourceRequest:
       memory: 256Mi
@@ -215,7 +287,7 @@ components: # The workflow, dividdd into manageable stages
     references:
       - stage0.GetNanoporeName:output
       - stage0.GetNanoporeSource:output
-      - stage1.GeoAmalgamate/geometricProperties.json:copy
+      - stage1.Postprocess/geometricProperties.json:copy
     resourceManager:
       kubernetes:
         image: quay.io/st4sd/community-applications/geometry-mdlab:latest
@@ -223,15 +295,15 @@ components: # The workflow, dividdd into manageable stages
     resourceRequest:
       memory: 256Mi
 
-  - stage: 2 #dumps the results to a json file and compresses to tgz
+  - stage: 2 # Dumps the results to a json file and compresses to tgz
     name: AggregateGeometry
     command:
       environment: geometry
       executable: aggregate_geometry_output.py
-      arguments: --FrameworkName stage0.GetNanoporeName:output  --OutputFolders stage1.GeoAmalgamate:ref
+      arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage1.Postprocess/geometricProperties.json:copy
     references:
       - stage0.GetNanoporeName:output
-      - stage1.GeoAmalgamate:ref
+      - stage1.Postprocess/geometricProperties.json:copy
     resourceManager:
       kubernetes:
         image: quay.io/st4sd/community-applications/geometry-mdlab:latest
