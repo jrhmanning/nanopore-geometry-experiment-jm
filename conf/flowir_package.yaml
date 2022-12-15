@@ -6,7 +6,7 @@ interface:
       hookGetInputIds:
         source:
           path: 'input/cif_files.dat'
-  propertiesSpec:
+  propertiesSpec: # output information description
   - name: 'D_is'
     description: '"Diameter of largest included sphere", expressed in Å (Angstrom)'
     propertyExtractionMethod:
@@ -92,14 +92,14 @@ interface:
         source:
           keyOutput: 'geometricalProperties'
 
-variables:
+variables: #input variables defined during workflow
   default:
     global:
-      numberOfNanopores: 3
-      probeRadius_A: 1.4
-      zeo_memory: '2Gi'
+      numberOfNanopores: 3 # number of materials to analyse
+      probeRadius_A: 1.4 # Prome atom radius
+      zeo_memory: '2Gi' # allocatable memory
 
-blueprint:
+blueprint: # Workflow scheduling information (job length, jobscript syntax)
   openshift:
     global:
       resourceManager:
@@ -107,7 +107,7 @@ blueprint:
           walltime: 14400.0
           backend: kubernetes
 
-environments:
+environments: # defining environment variables like PYTHONPATH (?)
   default:
     geometry:
       DEFAULTS: INGRESS
@@ -116,13 +116,13 @@ environments:
     raspa:
       PATH: /raspa/bin:$PATH
 
-application-dependencies:
+application-dependencies: 
   default:
     - nanopore-database
 
-components:
+components: # The workflow, dividdd into manageable stages
 
-  - stage: 0
+  - stage: 0 # finds the directory for your input files in input/cif_files.dat
     name: GetNanoporeSource
     command:
       arguments: sed -n "$((%(replica)s+1)),+0p" input/cif_files.dat:ref | awk -F "/" '{print $1}'
@@ -135,7 +135,7 @@ components:
     workflowAttributes:
       replicate: '%(numberOfNanopores)s'
 
-  - stage: 0
+  - stage: 0 # finds the file names for your input files in input/cif_files.dat
     name: GetNanoporeName
     command:
       arguments: sed -n "$((%(replica)s+1)),+0p" input/cif_files.dat:ref | awk -F "/" '{print $2}'
@@ -148,7 +148,7 @@ components:
     workflowAttributes:
       replicate: '%(numberOfNanopores)s'
 
-  - stage: 0
+  - stage: 0 # Creates preprocesses filenames into input geometries for Zeo
     name: AsymmetricUnitCell
     command:
       environment: raspa
@@ -169,7 +169,7 @@ components:
       - Killed
       - KnownIssue
 
-  - stage: 1
+  - stage: 1 # runs Zeo
     name: Zeo
     command:
       environment: geometry
@@ -189,7 +189,7 @@ components:
       - Killed
       - KnownIssue
 
-  - stage: 1
+  - stage: 1 # postprocesses output to a json file
     name: GeoAmalgamate
     command:
       environment: geometry
@@ -206,7 +206,7 @@ components:
     resourceRequest:
       memory: 256Mi
 
-  - stage: 1
+  - stage: 1 # Adds the results metadata to the master database
     name: WriteGeometryToDatabase
     command:
       environment: geometry
@@ -223,7 +223,7 @@ components:
     resourceRequest:
       memory: 256Mi
 
-  - stage: 2
+  - stage: 2 #dumps the results to a json file and compresses to tgz
     name: AggregateGeometry
     command:
       environment: geometry
@@ -241,7 +241,7 @@ components:
     workflowAttributes:
       aggregate: true
 
-output:
+output: # returns it to the user
   geometricalProperties:
     data-in: "AggregateGeometry/geometry.tgz:copy"
     stages:
