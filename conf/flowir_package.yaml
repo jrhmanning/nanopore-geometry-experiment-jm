@@ -300,10 +300,10 @@ components: # The workflow, dividdd into manageable stages
     command:
       environment: geometry
       executable: aggregate_geometry_output.py
-      arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage1.Postprocess/geometricProperties.json:copy
+      arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage1.Postprocess/geometricProperties.json:ref
     references:
       - stage0.GetNanoporeName:output
-      - stage1.Postprocess/geometricProperties.json:copy
+      - stage1.Postprocess/geometricProperties.json:ref
     resourceManager:
       kubernetes:
         image: quay.io/st4sd/community-applications/geometry-mdlab:latest
