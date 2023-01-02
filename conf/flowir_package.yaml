@@ -232,7 +232,7 @@ components: # The workflow, dividdd into manageable stages
       - stage0.GetNanoporeSource:output
     resourceManager:
       kubernetes:
-        image: hub.docker.com/layers/jrhmanning/poreblazer:latest
+        image: jrhmanning/poreblazer:latest
         cpuUnitsPerCore: 0.25
     resourceRequest:
       memory: 512Mi
@@ -253,7 +253,7 @@ components: # The workflow, dividdd into manageable stages
       - stage0.InputFileGen/xyz.tgz:copy
     resourceManager:
       kubernetes:
-        image: hub.docker.com/layers/jrhmanning/poreblazer:latest
+        image: jrhmanning/poreblazer:latest
         cpuUnitsPerCore: 1.0
     resourceRequest:
       memory: '%(zeo_memory)s'
@@ -273,7 +273,7 @@ components: # The workflow, dividdd into manageable stages
       - stage1.PoreBlazer/summary.tgz:copy
     resourceManager:
       kubernetes:
-        image: hub.docker.com/layers/jrhmanning/poreblazer:latest # need to update the docker image to have the postprocessing script in too
+        image: jrhmanning/poreblazer:latest # need to update the docker image to have the postprocessing script in too
         cpuUnitsPerCore: 0.25
     resourceRequest:
       memory: 256Mi
