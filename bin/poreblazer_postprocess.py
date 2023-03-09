@@ -7,31 +7,38 @@ import argparse
 import json
 import os
 from pathlib import Path
+import tarfile
 
 
-# # Required parameters
-# parser = argparse.ArgumentParser(description='Amalgamating geometric descriptors.')
-# parser.add_argument('directory',
-#                     type=str,
-#                     action='store',
-#                     metavar='DIRECTORY',
-#                     help='Directory for storing input/output files.')
-# arg = parser.parse_args()
+# Required parameters
+parser = argparse.ArgumentParser(description='Amalgamating geometric descriptors.')
+parser.add_argument('directory',
+                    type=str,
+                    action='store',
+                    metavar='DIRECTORY',
+                    help='Directory for storing input/output files.')
+parser.add_argument('-f','--FrameworkName',
+                    type=str,
+                    action='store',
+                    required=True,
+                    metavar='FRAMEWORK_NAME',
+                    help='Name of the framework used (and associated .cif file).')
+args = parser.parse_args()
 
 # Build the geometric dictionary
 geometric_dict = {'geometricProperties': []}
 
+inputdir = Path(args.directory)
+filename = f'{args.FrameworkName}_summary.dat'
 
-inputdir = Path(r'C:\Users\d23895jm\Desktop\poreblazer_docker_interface')
-framework = 'pcn-57'
-filename = f'{framework}_summary.dat'
+with tarfile.open('summary.tgz', 'r:gz') as tar:
+    tar.extract(f'{inputdir}/{filename}')
 
 data = []
 with open(inputdir / filename, 'r') as f:
     for line in f:
         data.append(line.strip().split())
 
-#print('\n'.join([f'{c}: {x}' for c,x in enumerate(data)]))
 
 output = [
     {'name': 'Volume', 'value': float(data[1][1]), 'unit': 'Angstrom^3'},
@@ -70,5 +77,4 @@ geometric_dict['geometricProperties'] += output
 # Dump the geometric dictionary to a json file
 # with open(os.path.join(arg.directory, 'geometricProperties.json'), mode='w') as f:
 with open(inputdir / 'geometricProperties.json', mode='w') as f:
-
     json.dump(geometric_dict, f, indent=2)
