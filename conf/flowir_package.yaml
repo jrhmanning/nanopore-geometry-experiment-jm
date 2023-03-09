@@ -224,8 +224,8 @@ components: # The workflow, dividdd into manageable stages
     name: InputFileGen
     command:
       environment: geometry
-      executable: poreblazer_preprocess.py
-      arguments: --FrameworkFolder nanopore-database:ref -f stage0.GetNanoporeName:output -FrameworkFolder stage0.GetNanoporeSource:output -o . #works?
+      executable: python 
+      arguments: poreblazer_preprocess.py --FrameworkFolder nanopore-database:ref -f stage0.GetNanoporeName:output -FrameworkFolder stage0.GetNanoporeSource:output -o /data_io #works?
     references:
       - nanopore-database:ref
       - stage0.GetNanoporeName:output
@@ -245,8 +245,8 @@ components: # The workflow, dividdd into manageable stages
     name: PoreBlazer
     command:
       environment: geometry
-      executable: poreblazer_run.py
-      arguments: -f stage0.GetNanoporeName:output -i . -o .
+      executable: python 
+      arguments: poreblazer_run.py -f stage0.GetNanoporeName:output -i /data_io -o /data_io -f stage0.GetNanoporeName:output
     references:
       - stage0.GetNanoporeName:output
       - stage0.InputFileGen/input.dat:copy
@@ -266,8 +266,8 @@ components: # The workflow, dividdd into manageable stages
     name: Postprocess
     command:
       environment: geometry
-      executable: poreblazer_postprocess.py 
-      arguments: -f stage0.GetNanoporeName:output .
+      executable: python poreblazer_postprocess.py 
+      arguments: poreblazer_postprocess.py -f stage0.GetNanoporeName:output -o .
     references:
       - stage0.GetNanoporeName:output
       - stage1.PoreBlazer/summary.tgz:copy
