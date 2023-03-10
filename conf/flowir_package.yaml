@@ -1,5 +1,5 @@
 interface:
-  description: 'Uses the Zeo++ software package to calculate geometric properties of nanoporous materials.'
+  description: 'Uses the Poreblazer software package to calculate geometric properties of nanoporous materials.'
   inputSpec:
     namingScheme: 'MaterialSource/MaterialName'
     inputExtractionMethod:
