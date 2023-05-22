@@ -266,7 +266,7 @@ components: # The workflow, dividdd into manageable stages
     name: Postprocess
     command:
       environment: geometry
-      executable: python poreblazer_postprocess.py 
+      executable: python
       arguments: poreblazer_postprocess.py -f stage0.GetNanoporeName:output -o .
     references:
       - stage0.GetNanoporeName:output
@@ -282,8 +282,8 @@ components: # The workflow, dividdd into manageable stages
     name: WriteGeometryToDatabase
     command:
       environment: geometry
-      executable: python /bin/write_geometry_to_database.py
-      arguments: --FrameworkName stage0.GetNanoporeName:output --FrameworkSource stage0.GetNanoporeSource:output .
+      executable: python 
+      arguments: /bin/write_geometry_to_database.py --FrameworkName stage0.GetNanoporeName:output --FrameworkSource stage0.GetNanoporeSource:output .
     references:
       - stage0.GetNanoporeName:output
       - stage0.GetNanoporeSource:output
@@ -299,8 +299,8 @@ components: # The workflow, dividdd into manageable stages
     name: AggregateGeometry
     command:
       environment: geometry
-      executable: python /bin/aggregate_geometry_output.py
-      arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage2.Postprocess/geometricProperties.json:ref
+      executable: python 
+      arguments: /bin/aggregate_geometry_output.py --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage2.Postprocess/geometricProperties.json:ref
     references:
       - stage0.GetNanoporeName:output
       - stage2.Postprocess/geometricProperties.json:ref
