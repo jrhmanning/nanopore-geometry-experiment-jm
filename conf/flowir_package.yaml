@@ -295,6 +295,24 @@ components: # The workflow, dividdd into manageable stages
     resourceRequest:
       memory: 256Mi
 
+  - stage: 3 # Dumps the results to a json file and compresses to tgz
+    name: AggregateGeometry
+    command:
+      environment: geometry
+      executable: python 
+      arguments: /bin/aggregate_geometry_output.py --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage2.Postprocess/geometricProperties.json:ref
+    references:
+      - stage0.GetNanoporeName:output
+      - stage2.Postprocess/geometricProperties.json:ref
+    resourceManager:
+      kubernetes:
+        image: jrhmanning/geometry-mdlab-mirror:latest
+        cpuUnitsPerCore: 0.25
+    resourceRequest:
+      memory: 256Mi
+    workflowAttributes:
+      aggregate: true
+
 output: # returns it to the user
   geometricalProperties:
     data-in: "AggregateGeometry/geometry.tgz:copy"
