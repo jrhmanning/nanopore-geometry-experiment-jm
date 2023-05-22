@@ -315,9 +315,9 @@ components: # The workflow, dividdd into manageable stages
 
 output: # returns it to the user
   geometricalProperties:
-    data-in: "AggregateGeometry/geometry.tgz:copy"
+    data-in: "Postprocess/geometricProperties.json:copy"
     stages:
-      - 3
+      - 2
 
 platforms:
   - openshift
