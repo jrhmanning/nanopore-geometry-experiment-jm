@@ -262,7 +262,7 @@ components: # The workflow, dividdd into manageable stages
       - Killed
       - KnownIssue
 
-  - stage: 1 # postprocesses output to a json file
+  - stage: 2 # postprocesses output to a json file
     name: Postprocess
     command:
       environment: geometry
@@ -278,35 +278,35 @@ components: # The workflow, dividdd into manageable stages
     resourceRequest:
       memory: 256Mi
 
-  - stage: 1 # Adds the results metadata to the master database
+  - stage: 3 # Adds the results metadata to the master database
     name: WriteGeometryToDatabase
     command:
       environment: geometry
-      executable: write_geometry_to_database.py
+      executable: python write_geometry_to_database.py
       arguments: --FrameworkName stage0.GetNanoporeName:output --FrameworkSource stage0.GetNanoporeSource:output .
     references:
       - stage0.GetNanoporeName:output
       - stage0.GetNanoporeSource:output
-      - stage1.Postprocess/geometricProperties.json:copy
+      - stage2.Postprocess/geometricProperties.json:copy
     resourceManager:
       kubernetes:
-        image: quay.io/st4sd/community-applications/geometry-mdlab:latest
+        image: jrhmanning/geometry-mdlab-mirror:latest
         cpuUnitsPerCore: 0.25
     resourceRequest:
       memory: 256Mi
 
-  - stage: 2 # Dumps the results to a json file and compresses to tgz
+  - stage: 3 # Dumps the results to a json file and compresses to tgz
     name: AggregateGeometry
     command:
       environment: geometry
-      executable: aggregate_geometry_output.py
-      arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage1.Postprocess/geometricProperties.json:ref
+      executable: python aggregate_geometry_output.py
+      arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage2.Postprocess/geometricProperties.json:ref
     references:
       - stage0.GetNanoporeName:output
-      - stage1.Postprocess/geometricProperties.json:ref
+      - stage2.Postprocess/geometricProperties.json:ref
     resourceManager:
       kubernetes:
-        image: quay.io/st4sd/community-applications/geometry-mdlab:latest
+        image: jrhmanning/geometry-mdlab-mirror:latest
         cpuUnitsPerCore: 0.25
     resourceRequest:
       memory: 256Mi
