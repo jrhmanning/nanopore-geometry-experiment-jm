@@ -282,7 +282,7 @@ components: # The workflow, dividdd into manageable stages
     name: WriteGeometryToDatabase
     command:
       environment: geometry
-      executable: python write_geometry_to_database.py
+      executable: python /bin/write_geometry_to_database.py
       arguments: --FrameworkName stage0.GetNanoporeName:output --FrameworkSource stage0.GetNanoporeSource:output .
     references:
       - stage0.GetNanoporeName:output
@@ -299,7 +299,7 @@ components: # The workflow, dividdd into manageable stages
     name: AggregateGeometry
     command:
       environment: geometry
-      executable: python aggregate_geometry_output.py
+      executable: python /bin/aggregate_geometry_output.py
       arguments: --FrameworkName stage0.GetNanoporeName:output --OutputFolders stage2.Postprocess/geometricProperties.json:ref
     references:
       - stage0.GetNanoporeName:output
