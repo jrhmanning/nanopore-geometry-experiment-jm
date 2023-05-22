@@ -317,7 +317,7 @@ output: # returns it to the user
   geometricalProperties:
     data-in: "AggregateGeometry/geometry.tgz:copy"
     stages:
-      - 2
+      - 3
 
 platforms:
   - openshift
